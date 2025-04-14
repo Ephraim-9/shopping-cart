@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard";
 
 function Shop() {
   const [products, setProducts] = useState([]);
@@ -37,11 +38,17 @@ function Shop() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <div className="ProductCardGrid">
           {products.map((p) => (
-            <li key={p.id}>{p.title}</li>
+            <ProductCard
+              key={p.id}
+              id={p.id}
+              title={p.title}
+              price={p.image}
+              image={p.image}
+            />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

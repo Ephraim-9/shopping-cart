@@ -44,7 +44,7 @@ function Shop() {
               key={p.id}
               id={p.id}
               title={p.title}
-              price={p.image}
+              price={p.price}
               image={p.image}
             />
           ))}

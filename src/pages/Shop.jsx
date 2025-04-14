@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import "../index.css";
 
 function Shop() {
   const [products, setProducts] = useState([]);

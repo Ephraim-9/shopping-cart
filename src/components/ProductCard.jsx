@@ -1,11 +1,12 @@
 import React from "react";
+import "./ProductCard.css";
 
-function ProductCard({ id, title, price, image }) {
+function ProductCard({ title, price, image }) {
   return (
-    <div className={id}>
-      <img src={image} alt="{title}" />
-      <h3>{title}</h3>
-      <h6>{price}</h6>
+    <div className="product-card">
+      <img src={image} alt="{title}" className="product-image" />
+      <h4 className="product-title">{title}</h4>
+      <h6 className="product-price">{price}</h6>
     </div>
   );
 }

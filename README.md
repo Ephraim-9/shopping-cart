@@ -1,1 +1,1 @@
-# [Shopping Cart](https://ephraim-9-shopping-cart.netlify.app/shop)
+# [Shopping Cart](https://ephraim-9-shopping-cart.netlify.app)

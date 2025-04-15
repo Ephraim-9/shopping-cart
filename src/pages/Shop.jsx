@@ -7,30 +7,23 @@ function Shop() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Fetch data from fakestoreapi
-    fetch("https://fakestoreapi.com/products")
-      // 2. Convert to JSON
+    fetch("https://dummyjson.com/products")
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("server error");
         }
         return response.json();
       })
-      // 3. Set it in state
       .then((data) => {
-        const cleanData = data.map((item) => {
-          const newItem = {
-            id: item.id,
-            title: item.title.toUpperCase(),
-            image: item.image,
-            price: item.price,
-          };
-          return newItem;
-        });
+        const cleanData = data.products.map((item) => ({
+          id: item.id,
+          title: item.title.toUpperCase(),
+          image: item.thumbnail,
+          price: item.price,
+        }));
         setProducts(cleanData);
       })
       .finally(() => setLoading(false));
-    // 4. Handle loading
   }, []);
 
   return (

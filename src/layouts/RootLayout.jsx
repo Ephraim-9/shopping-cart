@@ -1,12 +1,10 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export default function RootLayout() {
   return (
     <>
-      <h1>Shopping Cart</h1>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/shop">Shop</Link>
-      </nav>
+      <Navbar />
       <hr />
       <Outlet />
     </>

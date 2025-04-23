@@ -1,46 +1,56 @@
 import React, { useState } from "react";
-import "./ProductCard.css";
 
-function ProductCard({ title, price, image }) {
+const ProductCard = ({ image, title, price }) => {
   const [quantity, setQuantity] = useState(1);
 
-  function increment() {
+  const increment = () => {
     setQuantity((prev) => prev + 1);
-  }
+  };
 
-  function decrement() {
-    setQuantity((prev) => Math.max(prev - 1, 1));
-  }
+  const decrement = () => {
+    setQuantity((prev) => Math.max(1, prev - 1)); // Prevent going below 1
+  };
 
   return (
-    <div className="product-card">
-      <img src={image} alt={title} className="product-image" />
-      <h4 className="product-title">{title}</h4>
-      <h5 className="product-price">$ {price}</h5>
-
-      <button
-        onClick={() => {
-          increment();
-        }}
-      >
-        +
-      </button>
-      <input
-        type="number"
-        value={quantity}
-        onChange={(e) => setQuantity(Number(e.target.value))}
+    <div className="w-full max-w-[250px] p-[2%] m-[5%] shadow-md rounded-[14px] flex flex-col items-center transition-transform duration-300 ease-in-out transform hover:scale-105 bg-white">
+      <img
+        src={image}
+        alt={title}
+        className="w-full aspect-[1/1] object-contain"
       />
-      <button
-        onClick={() => {
-          decrement();
-        }}
-      >
-        -
-      </button>
+      <h4 className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] transition-transform duration-300 ease-in-out transform hover:whitespace-normal hover:overflow-visible hover:text-ellipsis text-black">
+        {title}
+      </h4>
+      <h5 className="text-lg font-semibold text-black">${price}</h5>
 
-      <button>Add to Cart</button>
+      <div className="flex items-center mt-2">
+        <button
+          onClick={decrement}
+          className="bg-gray-100 rounded-md p-1 mx-1 text-black"
+        >
+          -
+        </button>
+        <input
+          type="text"
+          value={quantity}
+          onChange={(e) =>
+            setQuantity(Math.max(1, Number(e.target.value) || 1))
+          } // Ensure at least 1
+          className="w-12 text-center border border-gray-300 rounded-md text-black"
+        />
+        <button
+          onClick={increment}
+          className="bg-gray-100 rounded-md p-1 mx-1 text-black"
+        >
+          +
+        </button>
+      </div>
+
+      <button className="mt-2 bg-gray-100 text-black rounded-md p-2 hover:bg-gray-200">
+        Add to Cart
+      </button>
     </div>
   );
-}
+};
 
 export default ProductCard;

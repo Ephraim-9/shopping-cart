@@ -32,7 +32,7 @@ function Shop() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="ProductCardGrid">
+        <div className="flex justify-center items-center flex-wrap">
           {products.map((p) => (
             <ProductCard
               key={p.id}

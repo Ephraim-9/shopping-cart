@@ -37,6 +37,7 @@ function Shop() {
             <ProductCard
               key={p.id}
               id={p.id}
+              product={p}
               title={p.title}
               price={p.price}
               image={p.image}

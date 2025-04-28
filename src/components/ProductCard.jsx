@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-const ProductCard = ({ image, title, price }) => {
+const ProductCard = ({ product, image, title, price }) => {
+  const { cartItems, setCartItems } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
+
+  function handleAddToCart() {
+    setCartItems([...cartItems, product]);
+  }
 
   const increment = () => {
     setQuantity((prev) => prev + 1);
   };
 
   const decrement = () => {
-    setQuantity((prev) => Math.max(1, prev - 1)); // Prevent going below 1
+    setQuantity((prev) => Math.max(1, prev - 1));
   };
 
   return (
@@ -35,7 +41,7 @@ const ProductCard = ({ image, title, price }) => {
           value={quantity}
           onChange={(e) =>
             setQuantity(Math.max(1, Number(e.target.value) || 1))
-          } // Ensure at least 1
+          }
           className="w-12 text-center border border-gray-300 rounded-md text-black"
         />
         <button
@@ -46,7 +52,10 @@ const ProductCard = ({ image, title, price }) => {
         </button>
       </div>
 
-      <button className="mt-2 bg-gray-100 text-black rounded-md p-2 hover:bg-gray-200">
+      <button
+        onClick={handleAddToCart}
+        className="mt-2 bg-gray-100 text-black rounded-md p-2 hover:bg-gray-200"
+      >
         Add to Cart
       </button>
     </div>

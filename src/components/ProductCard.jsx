@@ -6,7 +6,17 @@ const ProductCard = ({ product, image, title, price }) => {
   const [quantity, setQuantity] = useState(1);
 
   function handleAddToCart() {
-    setCartItems([...cartItems, product]);
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (existingItemIndex >= 0) {
+      const updatedCart = [...cartItems];
+      updatedCart[existingItemIndex].quantity += quantity;
+      setCartItems(updatedCart);
+    } else {
+      setCartItems([...cartItems, { ...product, quantity }]);
+    }
   }
 
   const increment = () => {

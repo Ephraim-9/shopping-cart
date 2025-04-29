@@ -12,8 +12,6 @@ function Navbar() {
     (sum, item) => sum + (item.quantity || 0),
     0
   );
-  console.log("Cart Items Detailed:", JSON.stringify(cartItems, null, 2));
-  console.log("Total Items:", totalItems);
   return (
     <div className="bg-blue-500 text-white p-4 flex justify-between items-center">
       {/* Logo Section */}

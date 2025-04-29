@@ -7,23 +7,31 @@ function Shop() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((response) => {
-        if (response.status >= 400) {
-          throw new Error("server error");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const cleanData = data.products.map((item) => ({
-          id: item.id,
-          title: item.title.toUpperCase(),
-          image: item.thumbnail,
-          price: item.price,
-        }));
-        setProducts(cleanData);
-      })
-      .finally(() => setLoading(false));
+    const storedProducts = localStorage.getItem("products");
+    if (storedProducts) {
+      setProducts(JSON.parse(storedProducts));
+      setLoading(false);
+    } else {
+      fetch("https://dummyjson.com/products")
+        .then((response) => {
+          if (response.status >= 400) {
+            throw new Error("server error");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const cleanData = data.products.map((item) => ({
+            id: item.id,
+            title: item.title.toUpperCase(),
+            image: item.thumbnail,
+            price: item.price,
+          }));
+
+          localStorage.setItem("products", JSON.stringify(cleanData));
+          setProducts(cleanData);
+        })
+        .finally(() => setLoading(false));
+    }
   }, []);
 
   return (

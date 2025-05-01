@@ -13,7 +13,7 @@ function Cart() {
         cartItems.map(({ image, title, price }, index) => (
           <div
             key={index}
-            className="w-full max-w-[250px] p-[2%] m-[5%] shadow-md rounded-[14px] flex flex-col items-center transition-transform duration-300 ease-in-out transform hover:scale-105 bg-white"
+            className="w-full max-w-[250px] p-[2%] m-[5%] shadow-md rounded-[14px] flex flex-col items-end transition-transform duration-300 ease-in-out transform hover:scale-105 bg-white"
           >
             <img
               src={image}

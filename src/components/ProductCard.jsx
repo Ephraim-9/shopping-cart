@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       <button
-        onClick={addToCart(product, quantity)}
+        onClick={() => addToCart(product, quantity)}
         className="mt-2 bg-gray-100 text-black rounded-md p-2 hover:bg-gray-200"
       >
         Add to Cart

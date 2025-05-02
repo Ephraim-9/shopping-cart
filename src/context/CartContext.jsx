@@ -22,11 +22,21 @@ function CartProvider({ children }) {
     }
   };
 
+  const removeFromCart = (product) => {
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.id === product.id
+    );
+
+    cartItems[existingItemIndex].quantity = 0;
+  };
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems, addToCart }}>
+    <CartContext.Provider
+      value={{ cartItems, setCartItems, addToCart, removeFromCart }}
+    >
       {children}
     </CartContext.Provider>
   );

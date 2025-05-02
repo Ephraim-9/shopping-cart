@@ -35,12 +35,15 @@ function Shop() {
   }, []);
 
   return (
-    <div>
-      <h2>Shop Page</h2>
+    <main className="min-h-screen px-4 md:px-16 py-10 bg-gray-50 text-gray-800">
+      <h2 className="text-4xl font-bold mb-10 text-center">
+        Shop All Products
+      </h2>
+
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-center text-lg text-gray-600">Loading...</p>
       ) : (
-        <div className="flex justify-center items-center flex-wrap">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
           {products.map((p) => (
             <ProductCard
               key={p.id}
@@ -53,7 +56,7 @@ function Shop() {
           ))}
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

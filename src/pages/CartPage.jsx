@@ -13,6 +13,7 @@ function Cart() {
       ) : (
         cartItems.map((p, index) => (
           <ProductCard
+            mode="cart"
             key={index}
             id={p.id}
             product={p}

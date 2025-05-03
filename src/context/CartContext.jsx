@@ -30,12 +30,25 @@ function CartProvider({ children }) {
     cartItems[existingItemIndex].quantity = 0;
   };
 
+  const handleQuantityChange = (id, newQuantity) => {
+    const updatedCart = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
+    );
+    setCartItems(updatedCart);
+  };
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
   return (
     <CartContext.Provider
-      value={{ cartItems, setCartItems, addToCart, removeFromCart }}
+      value={{
+        cartItems,
+        setCartItems,
+        addToCart,
+        removeFromCart,
+        handleQuantityChange,
+      }}
     >
       {children}
     </CartContext.Provider>

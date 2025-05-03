@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
-const ProductCard = ({ product }) => {
-  const { addToCart } = useContext(CartContext);
+const ProductCard = ({ product, mode = "shop" }) => {
+  const { addToCart, removeFromCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
 
   const increment = () => {
@@ -48,12 +48,21 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
 
-      <button
-        onClick={() => addToCart(product, quantity)}
-        className="mt-2 bg-gray-100 text-black rounded-md p-2 hover:bg-gray-200"
-      >
-        Add to Cart
-      </button>
+      {mode === "shop" ? (
+        <button
+          onClick={() => addToCart(product, quantity)}
+          className="mt-2 bg-gray-100 text-black rounded-md p-2 hover:bg-gray-200"
+        >
+          Add To Cart
+        </button>
+      ) : (
+        <button
+          onClick={() => removeFromCart(product)}
+          className="mt-2 bg-red-100 text-red-700 rounded-md p-2 hover:bg-red-200"
+        >
+          Remove From Cart
+        </button>
+      )}
     </div>
   );
 };

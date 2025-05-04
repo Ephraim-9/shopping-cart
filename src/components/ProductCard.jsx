@@ -2,15 +2,23 @@ import React, { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 const ProductCard = ({ product, mode = "shop" }) => {
-  const { addToCart, removeFromCart } = useContext(CartContext);
+  const { addToCart, removeFromCart, handleQuantityChange } =
+    useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
 
   const increment = () => {
-    setQuantity((prev) => prev + 1);
+    setQuantity((prev) => {
+      const newQuantity = prev + 1;
+      if (mode === "cart") handleQuantityChange(product.id, newQuantity);
+      return newQuantity;
+    });
   };
 
   const decrement = () => {
-    setQuantity((prev) => Math.max(1, prev - 1));
+    setQuantity((prev) => {
+      const newQuantity = Math.max(1, prev - 1);
+      if (mode === "cart") handleQuantityChange(product.id, newQuantity);
+    });
   };
 
   return (
@@ -32,14 +40,27 @@ const ProductCard = ({ product, mode = "shop" }) => {
         >
           -
         </button>
-        <input
-          type="text"
-          value={quantity}
-          onChange={(e) =>
-            setQuantity(Math.max(1, Number(e.target.value) || 1))
-          }
-          className="w-12 text-center border border-gray-300 rounded-md text-black"
-        />
+
+        {mode === "shop" ? (
+          <input
+            type="text"
+            value={quantity}
+            onChange={(e) =>
+              setQuantity(Math.max(1, Number(e.target.value) || 1))
+            }
+            className="w-12 text-center border border-gray-300 rounded-md text-black"
+          />
+        ) : (
+          <input
+            type="text"
+            value={quantity}
+            onChange={(e) => {
+              setQuantity(Math.max(1, Number(e.target.value) || 1));
+              handleQuantityChange(product.id, e.target.value);
+            }}
+            className="w-12 text-center border border-gray-300 rounded-md text-black"
+          />
+        )}
         <button
           onClick={increment}
           className="bg-gray-100 rounded-md p-1 mx-1 text-black"

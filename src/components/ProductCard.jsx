@@ -53,7 +53,7 @@ const ProductCard = ({ product, mode = "shop" }) => {
         ) : (
           <input
             type="text"
-            value={quantity}
+            value={product.quantity}
             onChange={(e) => {
               setQuantity(Math.max(1, Number(e.target.value) || 1));
               handleQuantityChange(product.id, e.target.value);

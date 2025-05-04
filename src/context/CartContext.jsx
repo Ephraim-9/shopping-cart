@@ -23,12 +23,7 @@ function CartProvider({ children }) {
   };
 
   const removeFromCart = (product) => {
-    const existingItemIndex = cartItems.findIndex(
-      (item) => item.id === product.id
-    );
-
-    const updatedCart = [...cartItems];
-    updatedCart[existingItemIndex].quantity = 0;
+    const updatedCart = cartItems.filter((item) => item.id !== product.id);
     setCartItems(updatedCart);
   };
 

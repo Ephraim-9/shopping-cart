@@ -27,7 +27,9 @@ function CartProvider({ children }) {
       (item) => item.id === product.id
     );
 
-    cartItems[existingItemIndex].quantity = 0;
+    const updatedCart = [...cartItems];
+    updatedCart[existingItemIndex].quantity = 0;
+    setCartItems(updatedCart);
   };
 
   const handleQuantityChange = (id, newQuantity) => {
